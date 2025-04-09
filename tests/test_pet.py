@@ -72,7 +72,7 @@ class Testpet:
 
     #Задание №3
     @allure.title('Добавление нового питомца с полными данными')
-    def test_add_all_pet(self):
+    def test_add_pet_with_full_data(self):
         with allure.step('Подготовка данных для создания питомца c полными данными'):
             payload = {
                 "id": 10,
