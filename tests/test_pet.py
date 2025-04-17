@@ -1,5 +1,6 @@
 import allure
 import jsonschema
+import pytest
 #import requests необходим для формирования базы API-запросов
 import requests
 # импортируем схему с файла пет_схема. Не забывать про "." перед schemas
@@ -154,3 +155,22 @@ class Testpet:
             response = requests.get(url=f'{BASE_URL}pet/{pet_id}')
             assert response.status_code == 404, 'Код ответа не совпал с ожидаемым'
 
+    #Пятый урок
+    @allure.title('Получение списка питомцев по статусу')
+    @pytest.mark.parametrize(
+        "status, expected_status_code",
+        [
+            ("available",200),
+            ("pending",200),
+            ("sold",200),
+            ("reserved",400),
+            ("",400)
+        ]
+    )
+    def test_get_pets_by_status(self,status,expected_status_code):
+        with allure.step(f'Отправка запроса на получение питомцев по статусу {status}'):
+            response = requests.get(url=f'{BASE_URL}pet/findByStatus', params={"status": status})
+
+        with allure.step('Проверка статуса ответа'):
+                assert response.status_code == expected_status_code, 'Код ответа не совпал с ожидаемым'
+                assert isinstance(response.json(),list)
