@@ -6,7 +6,7 @@ import requests
 # импортируем схему с файла пет_схема. Не забывать про "." перед schemas
 from .schemas.pet_schema import PET_SCHEMA
 
-BASE_URL = "http://5.181.109.28:9090/api/v3/"
+BASE_URL = "https://swagger.rv-school.ru/api/v3/"
 
 @allure.feature("Pet")
 class Testpet:
@@ -162,6 +162,7 @@ class Testpet:
         [
             ("available",200),
             ("pending",200),
+    #Задание №5
             ("sold",200),
             ("reserved",400),
             ("",400)
@@ -174,3 +175,5 @@ class Testpet:
         with allure.step('Проверка статуса ответа'):
                 assert response.status_code == expected_status_code, 'Код ответа не совпал с ожидаемым'
                 assert isinstance(response.json(),list)
+
+
