@@ -11,7 +11,7 @@ BASE_URL = "https://swagger.rv-school.ru/api/v3/"
 class Teststore:
 
     #Задание №6.1 (тест-кейс 42)
-    @allure.title('Размещение заказа')
+    @allure.title('Попытка размещения заказа')
     def test_placing_an_order(self):
         with allure.step('Подготовка данных для создания заказа'):
             payload = {
@@ -29,7 +29,7 @@ class Teststore:
             jsonschema.validate(response_json, STORE_SCHEMA)
 
     #Задание №6.2 (тест-кейс 43)
-    @allure.title('Попытка найти информацию о закаказе по ID')
+    @allure.title('Попытка найти информацию о заказе по ID')
     def test_find_order_id (self, create_order):
         with allure.step('Получение ID созданного заказа'):
             order_id= create_order["id"]
@@ -40,8 +40,8 @@ class Teststore:
         with allure.step('Проверка статуса ответа'):
                 assert response.status_code == 200, 'Код ответа не совпал с ожидаемым'
 
-    #Задание 6.3 (тест-кейс 44)
-    @allure.title('Попытка удалить закаказ по ID')
+    #Задание №6.3 (тест-кейс 44)
+    @allure.title('Попытка удалить заказа по ID')
     def test_delete_order_id(self, create_order):
         with allure.step('Получение ID созданного заказа'):
             order_id = create_order["id"]
@@ -54,10 +54,11 @@ class Teststore:
 
         with allure.step('Отправка запроса на получение несуществующего заказа'):
             response = requests.get(url=f'{BASE_URL}store/order/{order_id}')
+            assert response.status_code == 404, 'Код ответа не совпал с ожидаемым'
 
-    #Задание 6.4 (тест-кейс 45)
+    #Задание №№6.4 (тест-кейс 45)
 
-    @allure.title('Попытка найти информацию о закаказе по ID')
+    @allure.title('Попытка найти информацию о заказе по ID')
     def test_find_noneexistent_order(self):
         with allure.step('Отправка запроса на получение информации по ID заказа'):
             response = requests.get(url=f'{BASE_URL}store/order/9999')
@@ -65,7 +66,7 @@ class Teststore:
         with allure.step('Проверка статуса ответа'):
             assert response.status_code == 404, 'Код ответа не совпал с ожидаемым'
 
-    #Задание 6.5 (тест-кейс 46)
+    #Задание №6.5 (тест-кейс 46)
     @allure.title('Попытка получения инвентаря магазина')
     def test_find_inventory(self):
         with allure.step('Отправка запроса на получение информации инвентаря магазина'):
