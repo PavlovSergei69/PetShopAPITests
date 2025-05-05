@@ -9,7 +9,7 @@ from .schemas.pet_schema import PET_SCHEMA
 BASE_URL = "https://swagger.rv-school.ru/api/v3/"
 
 @allure.feature("Pet")
-class Testpet:
+class TestPet:
 
     #Первый урок
     @allure.title('Попытка удалить несуществующего питомца')

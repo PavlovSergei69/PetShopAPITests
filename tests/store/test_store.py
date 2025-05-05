@@ -2,13 +2,13 @@ import allure
 import jsonschema
 import pytest
 import requests
-from tests.store.schemas.store_schema import STORE_SCHEMA
+from tests.store.schemas.store_schemas import STORE_SCHEMA, INVENTORY_SCHEMA
 
 BASE_URL = "https://swagger.rv-school.ru/api/v3/"
 
 #Шестой урок
 @allure.feature("Store")
-class Teststore:
+class TestStore:
 
     #Задание №6.1 (тест-кейс 42)
     @allure.title('Попытка размещения заказа')
@@ -71,10 +71,13 @@ class Teststore:
     def test_find_inventory(self):
         with allure.step('Отправка запроса на получение информации инвентаря магазина'):
             response = requests.get(url=f'{BASE_URL}store/inventory')
+            inventory = response.json()
 
         with allure.step ('Проверка статуса ответа и формата данных'):
             assert response.status_code == 200, 'Код ответа не совпал с ожидаемым'
-            assert isinstance(response.json(), dict)
+            assert isinstance(inventory, dict)
+            jsonschema.validate(inventory, INVENTORY_SCHEMA)
+
 
 
 
