@@ -1,14 +1,10 @@
-from random import setstate
-
 import allure
 import jsonschema
 import pytest
 #import requests необходим для формирования базы API-запросов
 import requests
+# импорт схемы с файла пет_схема. Не забывать про "." перед schemas
 from .schemas.pet_schema import PET_SCHEMA
-
-# импортируем схему с файла пет_схема. Не забывать про "." перед schemas
-
 
 BASE_URL = "https://swagger.rv-school.ru/api/v3/"
 
