@@ -2,7 +2,7 @@ import allure
 import jsonschema
 import pytest
 import requests
-from tests.store.schemas.store_schemas import STORE_SCHEMA, INVENTORY_SCHEMA
+from .schemas.store_schemas import STORE_SCHEMA, INVENTORY_SCHEMA
 
 BASE_URL = "https://swagger.rv-school.ru/api/v3/"
 
