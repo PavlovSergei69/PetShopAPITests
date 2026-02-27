@@ -1,18 +1,17 @@
 import allure
 import jsonschema
 import pytest
-#import requests необходим для формирования базы API-запросов
-import requests
+import requests # необходим для формирования базы API-запросов
 # импорт схемы с файла пет_схема. Не забывать про "." перед schemas
 from .schemas.pet_schema import PET_SCHEMA
 
-BASE_URL = "http://5.181.109.28:9090/api/v3/"
+BASE_URL = "http://5.181.109.28:9090/api/v3/"  # основная переменная может быть написана полностью ввернем регистре
 
 @allure.feature("Pet")
-class TestPet:
+class TestPet:  # название класса пишется с заглавной буквы
 
-    #Первый урок
-    @allure.title('Попытка удалить несуществующего питомца')
+    # Первый урок
+    @allure.title('Попытка удалить несуществующего питомца') # добавляет заголовок нашему тесту в Allure
     def test_delete_noneexistent_pet(self):
         #step-шаг
         with allure.step('Отправка запроса на удаление несуществующего питомца'):
@@ -23,10 +22,11 @@ class TestPet:
         with allure.step('Проверка текстового содержимого ответа'):
             assert response.text == 'Pet deleted', 'Текст ошибки не совпал с ожидаемым'
 
-    #Второй урок
+    # Второй урок
     @allure.title('Попытка обновить несуществующего питомца')
-    def test_update_noneexistent_pet(self):
+    def test_update_nonexistent_pet(self):
         with allure.step('Отправка запроса на обновление несуществующего питомца'):
+            # вместо payload можно использовать переменную body
             payload = {
                 "id": 9999,
                 "name": "Non-existent Pet",
@@ -41,7 +41,7 @@ class TestPet:
 
     #Задание №2
     @allure.title('Попытка найти несуществующего питомца')
-    def test_find_noneexistent_pet(self):
+    def test_find_nonexistent_pet(self):
         with allure.step('Отправка запроса на получение несуществующего питомца'):
             response = requests.get(url=f'{BASE_URL}pet/9999')
 
