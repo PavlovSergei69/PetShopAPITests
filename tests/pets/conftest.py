@@ -1,9 +1,9 @@
-import pytest
+import pytest #response_json - переменная, response.json() - функция
 import requests
 
 BASE_URL = "http://5.181.109.28:9090/api/v3/"
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope="function") #scope время действия фикстуры
 def create_pet():
     """Фикстура для создания питомца"""
     payload = {

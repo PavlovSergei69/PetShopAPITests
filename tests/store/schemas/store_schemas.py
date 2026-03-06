@@ -31,10 +31,13 @@ INVENTORY_SCHEMA = {
         "approved": {
             "type": "integer"
         },
+        "placed": {
+            "type": "integer"
+        },
         "delivered": {
             "type": "integer"
         }
     },
-    "required": ["approved", "delivered"],
+    "required": ["approved", "placed", "delivered"],
     "additionalProperties": False
 }

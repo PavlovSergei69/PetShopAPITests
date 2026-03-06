@@ -1,6 +1,6 @@
 PET_SCHEMA = {
     "type": "object",
-    "properties": {
+    "properties": { # характеритсики объекта. Смотреть пдф-лекцию
         "id": {
             "type": "integer"
         },
@@ -17,12 +17,12 @@ PET_SCHEMA = {
                     "type": "string"
                 }
             },
-            "required": ["id", "name"],
-            "additionalProperties": False
+            "required": ["id", "name"], # обязательные поля
+            "additionalProperties": False # никаких дополнительных данных не должно быть
         },
         "photoUrls": {
             "type": "array",
-            "items": {
+            "items": { # предметы массива. Смотреть пдф-лекцию
                 "type": "string"
             }
         },

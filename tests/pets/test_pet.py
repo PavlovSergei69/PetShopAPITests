@@ -60,7 +60,7 @@ class TestPet:  # название класса пишется с заглавн
                 "status": "available"
             }
             response = requests.post(url=f'{BASE_URL}pet', json=payload)
-            response_json = response.json()
+            response_json = response.json() #response_json - переменная, response.json() - функция
 
         with allure.step('Проверка статуса ответа и валидация JSON-схемы'):
             assert response.status_code == 200, 'Код ответа не совпал с ожидаемым'
@@ -92,14 +92,14 @@ class TestPet:  # название класса пишется с заглавн
                 "status": "available"
             }
             response = requests.post(url=f'{BASE_URL}pet', json=payload)
-            response_json = response.json()
+            response_json = response.json()  #response_json - переменная, response.json() - функция
 
         with allure.step('Проверка статуса ответа и валидация JSON-схемы'):
             assert response.status_code == 200, 'Код ответа не совпал с ожидаемым'
             jsonschema.validate(response_json, PET_SCHEMA)
 
         with allure.step('Проверка параметров питомца в ответе'):
-            assert response_json["id"] == payload["id"], 'id питомца не совпадает'
+            assert response_json["id"] == payload["id"], 'id питомца не совпадает' # == это сравнение
             assert response_json["name"] == payload["name"], 'имя питомца не совпадает'
             assert response_json["status"] == payload["status"], 'статус питомца не совпадает'
 
@@ -108,14 +108,16 @@ class TestPet:  # название класса пишется с заглавн
     #Фикстура вписывается в сам тест (create_pet)
     def test_get_pet_by_id(self,create_pet):
         with allure.step('Получение ID создания питомца'):
-            pet_id= create_pet["id"]
+            pet_id = create_pet["id"] #вытягиваю из словаря(массива) нужнный мне параметр - id
+            pet_name = create_pet["name"]
 
         with allure.step('Отправка запроса на получение информации о питомце по ID'):
             response = requests.get(f'{BASE_URL}pet/{pet_id}')
 
         with allure.step('Проверка статуса ответа и данных питомца'):
             assert response.status_code == 200, 'Код ответа не совпал с ожидаемым'
-            assert response.json()["id"] == pet_id
+            assert response.json()["id"] == pet_id, 'ID питомца не совпал'
+            assert response.json()["name"] == pet_name, 'Имя питомца не совпало'
 
     #Задание №4.1
     @allure.title('Попытка обновить информацию о питомце')
