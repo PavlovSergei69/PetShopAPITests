@@ -176,7 +176,7 @@ class TestPet:  # название класса пишется с заглавн
 
         with allure.step('Проверка статуса ответа и формата данных'):
                 if expected_status_code == 200:
-                    assert isinstance(response.json(),list), 'Не является списком'
+                    assert isinstance(response.json(),list), 'Не является списком' #проверяет, что ответ приходит в формате СПИСКА
 
                 elif expected_status_code == 400:
-                    assert isinstance(response.json(), dict), 'Не является словарем'
+                    assert isinstance(response.json(), dict), 'Не является словарем' #проверяет, что ответ приходит в формате СЛОВАР

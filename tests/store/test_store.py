@@ -75,7 +75,7 @@ class TestStore:
 
         with allure.step ('Проверка статуса ответа и формата данных'):
             assert response.status_code == 200, 'Код ответа не совпал с ожидаемым'
-            assert isinstance(inventory, dict)
+            assert isinstance(inventory, dict), 'Не является словарем'
             jsonschema.validate(inventory, INVENTORY_SCHEMA)
 
 
